@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Common French -ER Verbs with Pronunciation</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+    th, td { border: 1px solid #ccc; padding: 10px; text-align: center; }
+    button { padding: 5px 10px; cursor: pointer; }
+    h1 { text-align: center; }
+  </style>
+</head>
+<body>
+
+  <h1>Common French -ER Verbs with Pronunciation</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>French Verb</th>
+        <th>English Meaning</th>
+        <th>Listen</th>
+      </tr>
+    </thead>
+    <tbody id="verbsTable">
+      <!-- Rows will be inserted here -->
+    </tbody>
+  </table>
+
+<script>
+  const verbs = [
+    ["Accompagner", "to accompany"], ["Adorer", "to adore"], ["Aider", "to help"], ["Aimer", "to love / like"],
+    ["Ajouter", "to add"], ["Apporter", "to bring"], ["Arriver", "to arrive"], ["Cacher", "to hide"],
+    ["Casser", "to break"], ["Célébrer", "to celebrate"], ["Chanter", "to sing"], ["Chercher", "to look for"],
+    ["Commander", "to order"], ["Coûter", "to cost"], ["Couper", "to cut"], ["Danser", "to dance"],
+    ["Demander", "to ask"], ["Déjeuner", "to have lunch"], ["Dépenser", "to spend (money)"], ["Dessiner", "to draw"],
+    ["Détester", "to hate"], ["Désirer", "to desire"], ["Dîner", "to have dinner"], ["Donner", "to give"],
+    ["Écouter", "to listen"], ["Emprunter", "to borrow"], ["Entrer", "to enter"], ["Étudier", "to study"],
+    ["Expliquer", "to explain"], ["Fermer", "to close"], ["Fêter", "to celebrate"], ["Gagner", "to win / earn"],
+    ["Garder", "to keep / care"], ["Goûter", "to taste"], ["Habiter", "to live in"], ["Indiquer", "to indicate"],
+    ["Inviter", "to invite"], ["Jouer", "to play"], ["Laisser", "to leave (something)"], ["Laver", "to wash"],
+    ["Marcher", "to walk"], ["Mélanger", "to mix"], ["Monter", "to go up / climb"], ["Montrer", "to show"],
+    ["Oublier", "to forget"], ["Parler", "to speak"], ["Passer", "to pass / spend"], ["Penser", "to think"],
+    ["Pleurer", "to cry"], ["Porter", "to carry / wear"], ["Pousser", "to push"], ["Préparer", "to prepare"],
+    ["Prêter", "to lend"], ["Raconter", "to tell (a story)"], ["Rater", "to miss (bus/train)"],
+    ["Regarder", "to watch / look at"], ["Remercier", "to thank"], ["Rentrer", "to come back in"],
+    ["Rester", "to stay"], ["Retourner", "to return"], ["Sacrifier", "to sacrifice"], ["Saluer", "to greet"],
+    ["Sauver", "to save"], ["Séparer", "to separate"], ["Soigner", "to care for"], ["Téléphoner", "to call"],
+    ["Tomber", "to fall"], ["Tourner", "to turn"], ["Travailler", "to work"], ["Traverser", "to cross"],
+    ["Trouver", "to find"], ["Utiliser", "to use"], ["Visiter", "to visit"], ["Voler", "to steal / fly"]
+  ];
+
+  const tableBody = document.getElementById("verbsTable");
+
+  verbs.forEach(([french, english], index) => {
+    const row = document.createElement("tr");
+    row.innerHTML = `
+      <td>${index + 1}</td>
+      <td>${french}</td>
+      <td>${english}</td>
+      <td><button onclick="speak('${french}')">🔊 Listen</button></td>
+    `;
+    tableBody.appendChild(row);
+  });
+
+  function speak(text) {
+    window.speechSynthesis.cancel();
+    const utterance = new SpeechSynthesisUtterance(text);
+    const voices = window.speechSynthesis.getVoices();
+    const frenchVoice = voices.find(voice => voice.lang.includes('fr'));
+
+    if (frenchVoice) {
+      utterance.voice = frenchVoice;
+    }
+    utterance.lang = 'fr-FR';
+    window.speechSynthesis.speak(utterance);
+  }
+</script>
+
+</body>
+</html>
